@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <title>Blog</title>
+    <!-- Bootstrap Core CSS -->
+    <#include "commons/header.html"/>
+    <link rel="stylesheet" href="${basePath}/css/pages.css">
+</head>
+
+<body ontouchstart="">
+
+<style type="text/css">
+    header.intro-header{
+        background-image: url('https://res.cloudinary.com/dqxtn0ick/image/upload/v1542285471/header/home.jpg')
+    }
+</style>
+<!-- 头部 start-->
+<header class="intro-header">
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+                    <div class="site-heading">
+                        <!--<hr class="small">-->
+                        <span class="subheading">个人博客</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- 头部 end-->
+
+<!-- 导航开始 -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">首页</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+    <nav>'s height woule be hold on by its content.
+    so, when navbar scale out, the <nav> will cover tags.
+    also mask any touch event of tags, unfortunately.
+-->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+
+                    <li>
+                        <a href="/archive/">Archives</a>
+                    </li>
+
+                    <li>
+                        <a href="/tags/">Tags</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<!-- 导航 结束 -->
+<!--内容 开始-->
+<div class="container" id="app">
+        <!-- USE SIDEBAR -->
+        <!-- Post Container -->
+        <div class="
+                col-lg-8 col-lg-offset-1
+                col-md-8 col-md-offset-1
+                col-sm-12
+                col-xs-12
+                post-container
+            ">
+            <!-- Main Content -->
+            <div class="post-preview-container">
+                 <div class="post-preview" v-for="(blog,index) in blogs" :key="index">
+
+                <a target="_blank" :title="blog.title" v-bind:href="'${basePath}/detail/'+blog.id">
+                    <h2 class="post-title">
+                    [{{blog.categoryName}}]   {{blog.title}}
+                    </h2>
+                    <h3 class="post-subtitle">
+                    </h3>
+                    <div class="post-content-preview">
+                      {{blog.description}}
+                    </div>
+                </a>
+                <p class="post-meta" style="margin: 10px 0;">
+                    Posted by  on {{blog.createTime| formatDate("yyyy/MM/dd hh:mm:ss")}}
+                </p>
+                <div class="tags">
+                    <a href="'/tags/#'+blog.categoryName" title="随笔">{{blog.categoryName}}</a>
+                </div>
+            </div>
+            </div>
+            <div id="page">
+                <vue-nav :cur="pageNum":all="pages":callback="callback"></vue-nav>
+            </div>
+    </div>
+</div>
+<!--内容 结束-->
+
+<!--引入底部 开始-->
+<#include "commons/footer.html"/>
+<!--引入底部 结束 -->
+
+<!-- 引入公共的js 模板-->
+<#include "commons/js.html"/>
+<script src="${basePath}/js/vue-nav.js"></script>
+<script src="${basePath}/js/index.js"></script>
+
+</body>
+</html>
